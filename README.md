@@ -53,11 +53,11 @@ Open http://localhost:3000 with your browser to see the result.
 
 ## 🏗️ Project Structure
 
-- src/app: Next.js App Router pages and layouts.
-- src/components: Reusable UI components (Modals, Forms, Tables).
-- src/services: API service layers for communicating with different microservices.
-- src/lib: Shared configurations (Axios instances, Auth helpers).
-- src/types: TypeScript interfaces for API requests and responses.
+- `src/app`: Next.js App Router pages and layouts.
+- `src/components`: Reusable UI components (Modals, Forms, Tables).
+- `src/services`: API service layers for communicating with different microservices.
+- `src/lib`: Shared configurations (Axios instances, Auth helpers).
+- `src/types`: TypeScript interfaces for API requests and responses.
 
 ## 🔒 Security Implementation
 
