@@ -90,7 +90,7 @@ const NewOrderModal = ({ isOpen, onClose, onSuccess }: Props) => {
                 key={t.id}
                 onClick={() => setSelectedTable(t.tableNumber)}
                 className={`h-12 w-12 rounded-xl border font-bold transition-all ${
-                  selectedTable === t.id
+                  selectedTable === t.tableNumber
                     ? "bg-amber-500 border-amber-500 text-slate-950 scale-110 shadow-lg shadow-amber-500/20"
                     : "bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-600"
                 }`}
