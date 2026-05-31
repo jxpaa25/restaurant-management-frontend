@@ -7,7 +7,7 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   token: string;
-  isFirstLogin: boolean;
+  firstLogin: boolean;
 }
 
 export type Role = "ROLE_ADMIN" | "ROLE_MANAGER" | "ROLE_WAITER";
@@ -30,4 +30,8 @@ export interface CreateOrderRequest {
     menuItemId: number;
     quantity: number;
   }[];
+}
+
+export interface PasswordChangeRequest {
+  newPassword: string;
 }

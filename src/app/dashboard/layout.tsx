@@ -39,9 +39,19 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 Administracija
               </p>
               <SidebarLink
+                href="/dashboard/tables"
+                label="Upravljaj stolovima"
+                icon="📍"
+              />
+              <SidebarLink
                 href="/dashboard/menu-management"
                 label="Upravljaj Menijem"
                 icon="🍴"
+              />
+              <SidebarLink
+                href="/dashboard/staff"
+                label="Zaposleni"
+                icon="👥"
               />
             </div>
           )}
