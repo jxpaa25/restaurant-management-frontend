@@ -6,7 +6,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<{
+    username: string;
+    roles: string[];
+    isAdmin: boolean;
+    isManager: boolean;
+    isWaiter: boolean;
+  } | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -17,6 +23,17 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   if (!user) return null;
 
+  const getRoleLabel = () => {
+    if (!user.isAdmin && !user.isManager && !user.isWaiter) {
+      return "ZAPOSLENI";
+    }
+    let label = "";
+    if (user.isAdmin) label += "ADMIN ";
+    if (user.isManager) label += "MENADŽER ";
+    if (user.isWaiter) label += "KONOBAR";
+    return label.trim();
+  };
+
   return (
     <div className="flex min-h-screen bg-slate-950 text-slate-50">
       {/* Sidebar */}
@@ -26,17 +43,17 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </h2>
 
         <nav className="flex-1 space-y-2">
-          {/* Zajedničke rute (Konobar + Admin) */}
+          {/* SERVISNA SEKCIJA - Pristup imaju svi ulogovani (Authenticated) */}
           <p className="text-xs font-semibold text-slate-500 uppercase mb-2 ml-2">
             Servis
           </p>
           <SidebarLink href="/dashboard/orders" label="Porudžbine" icon="📝" />
 
-          {/* Admin sekcija */}
-          {user.isAdmin && (
+          {/* MANAGER SEKCIJA - Upravljanje resursima (Meni i Stolovi) */}
+          {user.isManager && (
             <div className="pt-6 mt-6 border-t border-slate-800">
               <p className="text-xs font-semibold text-slate-500 uppercase mb-2 ml-2">
-                Administracija
+                Menadžment
               </p>
               <SidebarLink
                 href="/dashboard/tables"
@@ -48,6 +65,15 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 label="Upravljaj Menijem"
                 icon="🍴"
               />
+            </div>
+          )}
+
+          {/* ADMIN SEKCIJA - Isključivo upravljanje zaposlenima */}
+          {user.isAdmin && (
+            <div className="pt-6 mt-6 border-t border-slate-800">
+              <p className="text-xs font-semibold text-slate-500 uppercase mb-2 ml-2">
+                Administracija
+              </p>
               <SidebarLink
                 href="/dashboard/staff"
                 label="Zaposleni"
@@ -57,6 +83,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           )}
         </nav>
 
+        {/* Odjava sa čišćenjem oba tokena */}
         <button
           onClick={() => {
             localStorage.removeItem("token");
@@ -74,8 +101,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           <h1 className="text-2xl font-semibold">
             Dobrodošao, <span className="text-amber-500">{user.username}</span>
           </h1>
-          <div className="bg-slate-800 px-4 py-1 rounded-full text-xs font-medium border border-slate-700">
-            {user.isAdmin ? "ADMINISTRATOR" : "KONOBAR"}
+          <div className="bg-slate-800 px-4 py-1 rounded-full text-xs font-medium border border-slate-700 text-amber-500">
+            {getRoleLabel()}
           </div>
         </header>
         {children}

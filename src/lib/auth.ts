@@ -9,15 +9,19 @@ export const getAuthData = () => {
 
   try {
     const decoded = jwtDecode<JwtPayload>(token);
+
+    // Proveravamo prisustvo svake uloge ponaosob
+    const roles = decoded.roles || [];
+
     return {
       username: decoded.sub,
-      roles: decoded.roles,
-      isAdmin: decoded.roles.includes("ROLE_ADMIN"),
-      isWaiter:
-        decoded.roles.includes("ROLE_WAITER") ||
-        decoded.roles.includes("ROLE_ADMIN"),
+      roles: roles,
+      isAdmin: roles.includes("ROLE_ADMIN"),
+      isManager: roles.includes("ROLE_MANAGER"),
+      isWaiter: roles.includes("ROLE_WAITER"),
     };
   } catch (error) {
+    console.error("Greška pri dekodiranju tokena:", error);
     return null;
   }
 };
