@@ -1,13 +1,15 @@
 "use client";
 
 import { authService } from "@/services/authService";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,6 +19,8 @@ const LoginPage = () => {
       console.log(data);
 
       localStorage.setItem("token", data.token);
+
+      window.location.href = "/dashboard/menu-management";
     } catch (err: any) {
       setError(err.response?.data?.message || "Nešto je pošlo po zlu.");
     }

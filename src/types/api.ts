@@ -15,3 +15,9 @@ export interface RegisterRequest {
   password: string;
   roles: Set<Role>;
 }
+
+export interface CreateMenuItemRequest {
+  name: string;
+  description: string;
+  price: number;
+}
