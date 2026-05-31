@@ -31,7 +31,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             Servis
           </p>
           <SidebarLink href="/dashboard/orders" label="Porudžbine" icon="📝" />
-          <SidebarLink href="/dashboard/tables" label="Stolovi" icon="📍" />
 
           {/* Admin sekcija */}
           {user.isAdmin && (
@@ -43,16 +42,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 href="/dashboard/menu-management"
                 label="Upravljaj Menijem"
                 icon="🍴"
-              />
-              <SidebarLink
-                href="/dashboard/staff"
-                label="Zaposleni"
-                icon="👥"
-              />
-              <SidebarLink
-                href="/dashboard/reports"
-                label="Izveštaji"
-                icon="📊"
               />
             </div>
           )}

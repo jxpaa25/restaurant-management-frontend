@@ -12,10 +12,27 @@ export interface MenuItem {
   category: Category;
 }
 
+export enum RestaurantTableStatus {
+  FREE = "FREE",
+  OCCUPIED = "OCCUPIED",
+}
+
+export interface RestaurantTable {
+  id: number;
+  tableNumber: number;
+  status: RestaurantTableStatus;
+}
+
 export enum OrderStatus {
   PENDING = "PENDING",
   COMPLETED = "COMPLETED",
   CANCELLED = "CANCELLED",
+}
+
+export interface OrderItem {
+  id: number;
+  menuItem: { name: string; price: number };
+  quantity: number;
 }
 
 export interface Order {
@@ -28,9 +45,5 @@ export interface Order {
   totalPrice: number;
   createdAt: string;
   status: OrderStatus;
-  items: Array<{
-    id: number;
-    menuItem: { name: string; price: number };
-    quantity: number;
-  }>;
+  items: Array<OrderItem>;
 }

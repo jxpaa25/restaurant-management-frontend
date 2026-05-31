@@ -1,3 +1,5 @@
+import { OrderItem } from "./models/restaurantModels";
+
 export interface LoginRequest {
   username: string;
   password: string;
@@ -20,4 +22,12 @@ export interface CreateMenuItemRequest {
   name: string;
   description: string;
   price: number;
+}
+
+export interface CreateOrderRequest {
+  tableNumber: number;
+  items: {
+    menuItemId: number;
+    quantity: number;
+  }[];
 }
