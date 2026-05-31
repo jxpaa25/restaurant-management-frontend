@@ -60,6 +60,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <button
           onClick={() => {
             localStorage.removeItem("token");
+            localStorage.removeItem("refreshToken");
             window.location.href = "/login";
           }}
           className="mt-auto w-full p-3 rounded-lg text-slate-400 hover:bg-red-500/10 hover:text-red-500 transition-all text-left flex items-center gap-3"
