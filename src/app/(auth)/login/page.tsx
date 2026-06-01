@@ -24,6 +24,7 @@ const LoginPage = () => {
 
       // Odmah čuvamo token jer nam treba za change-password ili dashboard
       localStorage.setItem("token", data.token);
+      localStorage.setItem("refreshToken", data.refreshToken);
 
       if (data.firstLogin) {
         setIsFirstLogin(true);
