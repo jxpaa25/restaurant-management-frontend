@@ -19,7 +19,7 @@ const TablesManagementPage = () => {
 
   useEffect(() => {
     const user = getAuthData();
-    if (!user?.isAdmin) {
+    if (!user?.isManager) {
       router.push("/dashboard");
       return;
     }

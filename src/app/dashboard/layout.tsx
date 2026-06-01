@@ -43,11 +43,18 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </h2>
 
         <nav className="flex-1 space-y-2">
-          {/* SERVISNA SEKCIJA - Pristup imaju svi ulogovani (Authenticated) */}
-          <p className="text-xs font-semibold text-slate-500 uppercase mb-2 ml-2">
-            Servis
-          </p>
-          <SidebarLink href="/dashboard/orders" label="Porudžbine" icon="📝" />
+          {user.isWaiter && (
+            <>
+              <p className="text-xs font-semibold text-slate-500 uppercase mb-2 ml-2">
+                Konobari
+              </p>
+              <SidebarLink
+                href="/dashboard/orders"
+                label="Porudžbine"
+                icon="📝"
+              />
+            </>
+          )}
 
           {/* MANAGER SEKCIJA - Upravljanje resursima (Meni i Stolovi) */}
           {user.isManager && (

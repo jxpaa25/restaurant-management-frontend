@@ -6,12 +6,16 @@ import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { Order } from "@/types/models/restaurantModels";
 import NewOrderModal from "@/components/orders/NewOrderModal";
+import { getAuthData } from "@/lib/auth";
+import { useRouter } from "next/navigation";
 
 const OrdersManagementPage = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("");
+
+  const router = useRouter();
 
   const fetchOrders = async () => {
     try {
@@ -25,6 +29,11 @@ const OrdersManagementPage = () => {
   };
 
   useEffect(() => {
+    const user = getAuthData();
+    if (!user?.isWaiter) {
+      router.push("/dashboard");
+      return;
+    }
     fetchOrders();
     // Automatsko osvežavanje na svakih 45 sekundi
     const interval = setInterval(fetchOrders, 45000);
@@ -162,7 +171,7 @@ const OrdersManagementPage = () => {
                 </button>
                 <button
                   onClick={() => handleComplete(order.id)}
-                  className="flex-[2] py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all shadow-lg shadow-emerald-900/20"
+                  className="flex-2 py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all shadow-lg shadow-emerald-900/20"
                 >
                   ZAVRŠI I NAPLATI
                 </button>

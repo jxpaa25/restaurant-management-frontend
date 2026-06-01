@@ -28,7 +28,7 @@ export default function MenuManagementPage() {
 
   useEffect(() => {
     const user = getAuthData();
-    if (!user?.isAdmin) {
+    if (!user?.isManager) {
       router.push("/dashboard");
       return;
     }
@@ -209,7 +209,7 @@ export default function MenuManagementPage() {
                     <div className="font-semibold text-slate-100">
                       {item.name}
                     </div>
-                    <div className="text-xs text-slate-500 truncate max-w-[200px]">
+                    <div className="text-xs text-slate-500 truncate max-w-50">
                       {item.description}
                     </div>
                   </td>
